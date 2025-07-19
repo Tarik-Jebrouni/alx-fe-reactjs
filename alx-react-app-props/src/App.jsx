@@ -1,5 +1,6 @@
 import UserContext from "./components/UserContext";
 import UserProfile from "./components/UserProfile";
+import "./App.css";
 
 function App() {
   const userData = {
