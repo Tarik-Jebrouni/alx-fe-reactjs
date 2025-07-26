@@ -1,5 +1,5 @@
 import React from "react"; // ✅ This fixes the ReferenceError
-import { useRecipeStore } from "./store/recipeStore";
+import { useRecipeStore } from "./components/recipeStore";
 import { useEffect } from "react";
 import AddRecipeForm from "./components/AddRecipeForm";
 import RecipeList from "./components/RecipeList";

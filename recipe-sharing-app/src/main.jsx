@@ -1,11 +1,17 @@
-// src/main.jsx
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App"; // 🔁 This file must exist in src/
-import "./index.css"; // ✅ Optional, remove if not created
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import App from "./App";
+import RecipeDetails from "./components/RecipeDetails";
+import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/recipes/:id" element={<RecipeDetails />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
