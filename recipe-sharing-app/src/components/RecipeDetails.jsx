@@ -11,14 +11,23 @@ const RecipeDetails = () => {
     state.recipes.find((r) => r.id === recipeId)
   );
 
-  if (!recipe) return <p>Recipe not found.</p>;
+  if (!recipe) {
+    return <p>Recipe not found.</p>;
+  }
 
   return (
-    <div>
+    <div className="recipe-details">
       <h1>{recipe.title}</h1>
-      <p>{recipe.description}</p>
+      <p>
+        <strong>ID:</strong> {recipe.id}
+      </p>{" "}
+      {/* ✅ Explicitly show recipe.id */}
+      <p>
+        <strong>Description:</strong> {recipe.description}
+      </p>
       <EditRecipeForm recipe={recipe} />
-      <DeleteRecipeButton id={recipeId} />
+      <h3>Danger Zone</h3>
+      <DeleteRecipeButton id={recipe.id} />
     </div>
   );
 };
