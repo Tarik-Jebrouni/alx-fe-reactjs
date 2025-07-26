@@ -1,8 +1,10 @@
 import React from "react"; // ✅ This fixes the ReferenceError
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useRecipeStore } from "./components/recipeStore";
 import { useEffect } from "react";
 import AddRecipeForm from "./components/AddRecipeForm";
 import RecipeList from "./components/RecipeList";
+import RecipeDetails from "./components/RecipeDetails";
 import "./App.css"; // Import the CSS
 
 function App() {
@@ -32,11 +34,23 @@ function App() {
     setRecipes(sampleRecipes);
   }, [setRecipes]);
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Recipe Sharing App</h1>
-      <AddRecipeForm />
-      <RecipeList />
-    </div>
+    <Router>
+      <div className="app-container">
+        <h1>Recipe Sharing App</h1>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <AddRecipeForm />
+                <RecipeList />
+              </>
+            }
+          />
+          <Route path="/recipes/:id" element={<RecipeDetails />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

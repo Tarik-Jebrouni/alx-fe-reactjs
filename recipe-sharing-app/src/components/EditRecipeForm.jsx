@@ -14,23 +14,19 @@ const EditRecipeForm = ({ recipe }) => {
 
   return (
     <form onSubmit={handleUpdate}>
-      <label>
-        Title:
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Description:
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-      </label>
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Title"
+        required
+      />
+      <textarea
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        required
+        placeholder="Description"
+      />
       <button type="submit">Save Changes</button>
     </form>
   );
