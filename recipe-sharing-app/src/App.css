@@ -103,3 +103,15 @@ form button:hover {
 .recipe-card p {
   margin: 0;
 }
+input[type="text"] {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.recipe-card {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}

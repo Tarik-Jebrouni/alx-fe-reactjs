@@ -6,6 +6,7 @@ import AddRecipeForm from "./components/AddRecipeForm";
 import RecipeList from "./components/RecipeList";
 import RecipeDetails from "./components/RecipeDetails";
 import "./App.css"; // Import the CSS
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const setRecipes = useRecipeStore((state) => state.setRecipes);
@@ -34,23 +35,22 @@ function App() {
     setRecipes(sampleRecipes);
   }, [setRecipes]);
   return (
-    <Router>
-      <div className="app-container">
-        <h1>Recipe Sharing App</h1>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <AddRecipeForm />
-                <RecipeList />
-              </>
-            }
-          />
-          <Route path="/recipes/:id" element={<RecipeDetails />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="app-container">
+      <h1>Recipe Sharing App</h1>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <SearchBar />
+              <AddRecipeForm />
+              <RecipeList />
+            </>
+          }
+        />
+        <Route path="/recipes/:id" element={<RecipeDetails />} />
+      </Routes>
+    </div>
   );
 }
 
