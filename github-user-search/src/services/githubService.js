@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export async function fetchUserData({ username, location, minRepos }) {
-  // Construct GitHub search query
+export const fetchUserData = async ({ username, location, minRepos }) => {
   let query = '';
+
   if (username) query += `${username} in:login`;
   if (location) query += ` location:${location}`;
   if (minRepos) query += ` repos:>=${minRepos}`;
@@ -10,5 +10,5 @@ export async function fetchUserData({ username, location, minRepos }) {
   const url = `https://api.github.com/search/users?q=${encodeURIComponent(query)}`;
 
   const response = await axios.get(url);
-  return response.data.items; // array of users
-}
+  return response.data.items;  // List of users
+};
