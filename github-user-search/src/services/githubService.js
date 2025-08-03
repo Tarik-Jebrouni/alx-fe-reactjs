@@ -1,37 +1,14 @@
-import React, { useState } from 'react';
-import Search from '../components/Search';
-import { fetchUserData } from './services/githubService';
+import axios from 'axios';
 
-function App() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+export const fetchUserData = async ({ username, location, minRepos }) => {
+  let query = '';
 
-  const handleSearch = async (searchParams) => {
-    setLoading(true);
-    setError(null);
-    setUsers([]);
+  if (username) query += `${username} in:login`;
+  if (location) query += ` location:${location}`;
+  if (minRepos) query += ` repos:>=${minRepos}`;
 
-    try {
-      const result = await fetchUserData(searchParams);
-      if (result.length === 0) {
-        setError('No users found');
-      } else {
-        setUsers(result);
-      }
-    } catch (err) {
-      console("err: ",err)
-      setError('Failed to fetch users');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const url = `https://api.github.com/search/users?q=${encodeURIComponent(query)}`;
 
-  return (
-    <div>
-      <Search onSearch={handleSearch} users={users} loading={loading} error={error} />
-    </div>
-  );
-}
-
-export default App;
+  const response = await axios.get(url);
+  return response.data.items;  // List of users
+};
