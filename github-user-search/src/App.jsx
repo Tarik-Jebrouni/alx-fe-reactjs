@@ -2,25 +2,19 @@ import React, { useState } from "react";
 import Search from "./components/Search";
 import { fetchUserData } from "./services/githubService";
 
-function App() {
+const App = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleSearch = async (searchParams) => {
+  const handleSearch = async (params) => {
     setLoading(true);
     setError(null);
-    setUsers([]);
-
     try {
-      const result = await fetchUserData(searchParams);
-      if (result.length === 0) {
-        setError("No users found");
-      } else {
-        setUsers(result);
-      }
-    } catch (err) {
-      console.log("err :", err);
+      const results = await fetchUserData(params);
+      setUsers(results);
+      if (results.length === 0) setError("No users found");
+    } catch {
       setError("Failed to fetch users");
     } finally {
       setLoading(false);
@@ -28,15 +22,13 @@ function App() {
   };
 
   return (
-    <div>
-      <Search
-        onSearch={handleSearch}
-        users={users}
-        loading={loading}
-        error={error}
-      />
-    </div>
+    <Search
+      onSearch={handleSearch}
+      users={users}
+      loading={loading}
+      error={error}
+    />
   );
-}
+};
 
 export default App;
