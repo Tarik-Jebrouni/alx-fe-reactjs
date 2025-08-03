@@ -1,12 +1,40 @@
-import "./index.css";
-import React from "react";
+import React, { useState } from "react";
 import Search from "./components/Search";
+import { fetchUserData } from "./services/githubService";
 
 function App() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleSearch = async (searchParams) => {
+    setLoading(true);
+    setError(null);
+    setUsers([]);
+
+    try {
+      const result = await fetchUserData(searchParams);
+      if (result.length === 0) {
+        setError("No users found");
+      } else {
+        setUsers(result);
+      }
+    } catch (err) {
+      console.log("err :", err);
+      setError("Failed to fetch users");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <h1>GitHub User Search</h1>
-      <Search />
+    <div>
+      <Search
+        onSearch={handleSearch}
+        users={users}
+        loading={loading}
+        error={error}
+      />
     </div>
   );
 }
