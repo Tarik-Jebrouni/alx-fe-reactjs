@@ -1,28 +1,37 @@
-export const searchUsers = async ({ username, location, minRepos }) => {
-  try {
-    let query = [];
+import React, { useState } from 'react';
+import Search from '../components/Search';
+import { fetchUserData } from './services/githubService';
 
-    if (username) query.push(`user:${username}`);
-    if (location) query.push(`location:${location}`);
-    if (minRepos) query.push(`repos:>=${minRepos}`);
+function App() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-    const response = await fetch(
-      `https://api.github.com/search/users?q=${query.join('+')}`,
-      {
-        headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
-        },
+  const handleSearch = async (searchParams) => {
+    setLoading(true);
+    setError(null);
+    setUsers([]);
+
+    try {
+      const result = await fetchUserData(searchParams);
+      if (result.length === 0) {
+        setError('No users found');
+      } else {
+        setUsers(result);
       }
-    );
-
-    if (!response.ok) {
-      throw new Error(`GitHub API error: ${response.statusText}`);
+    } catch (err) {
+      console("err: ",err)
+      setError('Failed to fetch users');
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const data = await response.json();
-    return data.items || [];
-  } catch (error) {
-    console.error('API Error:', error);
-    throw error;
-  }
-};
+  return (
+    <div>
+      <Search onSearch={handleSearch} users={users} loading={loading} error={error} />
+    </div>
+  );
+}
+
+export default App;
