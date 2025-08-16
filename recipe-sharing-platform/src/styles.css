@@ -112,50 +112,69 @@
   text-decoration: none;
 }
 
-/* Custom styles for the form container */
-.form-container {
-  background-color: #f9fafb;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+/* src/styles.css */
+
+/* Custom container styling for the Add Recipe Form */
+.add-recipe-container {
+  background-color: #f9fafb; /* Light background for the form */
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Custom input field styles */
+/* Custom styling for the form title */
+.add-recipe-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #2d3748;
+}
+
+/* Custom styling for form fields */
 .custom-input,
 .custom-textarea {
-  border-radius: 8px;
   padding: 1rem;
   border: 1px solid #ddd;
+  border-radius: 8px;
   width: 100%;
-  box-sizing: border-box;
+  margin-bottom: 1rem;
   font-size: 1rem;
 }
 
+/* Focus styles for input fields */
 .custom-input:focus,
 .custom-textarea:focus {
-  border-color: #3b82f6;
+  border-color: #3182ce;
   outline: none;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.5);
 }
 
-/* Custom submit button */
-.submit-btn {
-  background-color: #3b82f6;
+/* Custom button styles */
+.submit-button {
+  background-color: #3182ce;
   color: white;
   padding: 1rem 2rem;
   border-radius: 8px;
   font-size: 1.125rem;
+  width: 100%;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.submit-btn:hover {
+.submit-button:hover {
   background-color: #2563eb;
 }
 
-/* Error message styling */
+/* Custom error message styling */
 .error-message {
   color: #ef4444;
   font-size: 0.875rem;
-  margin-bottom: 1rem;
+  margin-top: 0.25rem;
+}
+
+/* Additional padding and margin for error messages */
+.error-container {
+  margin-top: 1rem;
   text-align: center;
 }

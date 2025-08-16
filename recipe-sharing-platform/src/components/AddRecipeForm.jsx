@@ -2,46 +2,81 @@ import { useState } from "react";
 import "../styles.css";
 
 const AddRecipeForm = () => {
+  // State for form fields
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [steps, setSteps] = useState("");
-  const [error, setError] = useState("");
 
+  // State for errors
+  const [errors, setErrors] = useState({});
+
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validate the inputs
-    if (!title || !ingredients || !steps) {
-      setError("All fields are required");
+    // Reset errors before validation
+    setErrors({});
+
+    // Validate form fields
+    const validationErrors = validate();
+
+    // If there are validation errors, set them and stop form submission
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
 
-    const ingredientsArray = ingredients
-      .split(",")
-      .map((ingredient) => ingredient.trim());
+    // Submit the form (e.g., log the data or send it to the server)
+    console.log({ title, ingredients, steps });
 
-    if (ingredientsArray.length < 2) {
-      setError("Ingredients list must contain at least two items");
-      return;
-    }
-
-    console.log({ title, ingredients: ingredientsArray, steps });
-
-    // Clear form after submission
+    // Clear the form after submission
     setTitle("");
     setIngredients("");
     setSteps("");
-    setError("");
+  };
+
+  // Validate form fields
+  const validate = () => {
+    const errors = {};
+
+    // Check if title is empty
+    if (!title) {
+      errors.title = "Title is required";
+    }
+
+    // Check if ingredients are empty
+    if (!ingredients) {
+      errors.ingredients = "Ingredients are required";
+    } else if (ingredients.split(",").length < 2) {
+      // Check if ingredients contain at least 2 items
+      errors.ingredients = "Ingredients should be at least two items";
+    }
+
+    // Check if preparation steps are empty
+    if (!steps) {
+      errors.steps = "Preparation steps are required";
+    }
+
+    return errors;
   };
 
   return (
-    <div className="container mx-auto p-6 form-container">
-      <h2 className="text-2xl font-semibold text-center mb-6">
-        Submit a New Recipe
-      </h2>
-      {error && <div className="error-message">{error}</div>}
+    <div className="add-recipe-container max-w-lg mx-auto">
+      <h2 className="add-recipe-title">Submit a New Recipe</h2>
+
+      {/* Display errors if there are any */}
+      {Object.keys(errors).length > 0 && (
+        <div className="error-container text-red-500">
+          {Object.values(errors).map((error, index) => (
+            <div key={index} className="error-message">
+              {error}
+            </div>
+          ))}
+        </div>
+      )}
 
       <form onSubmit={handleSubmit}>
+        {/* Recipe Title */}
         <div className="mb-4">
           <label htmlFor="title" className="block text-lg font-medium mb-2">
             Recipe Title
@@ -54,8 +89,10 @@ const AddRecipeForm = () => {
             className="custom-input"
             placeholder="Enter recipe title"
           />
+          {errors.title && <div className="error-message">{errors.title}</div>}
         </div>
 
+        {/* Ingredients */}
         <div className="mb-4">
           <label
             htmlFor="ingredients"
@@ -70,8 +107,12 @@ const AddRecipeForm = () => {
             className="custom-textarea"
             placeholder="Enter ingredients (e.g., flour, sugar, eggs)"
           ></textarea>
+          {errors.ingredients && (
+            <div className="error-message">{errors.ingredients}</div>
+          )}
         </div>
 
+        {/* Preparation Steps */}
         <div className="mb-4">
           <label htmlFor="steps" className="block text-lg font-medium mb-2">
             Preparation Steps
@@ -83,10 +124,12 @@ const AddRecipeForm = () => {
             className="custom-textarea"
             placeholder="Enter cooking steps"
           ></textarea>
+          {errors.steps && <div className="error-message">{errors.steps}</div>}
         </div>
 
+        {/* Submit Button */}
         <div className="text-center">
-          <button type="submit" className="submit-btn">
+          <button type="submit" className="submit-button">
             Submit Recipe
           </button>
         </div>
