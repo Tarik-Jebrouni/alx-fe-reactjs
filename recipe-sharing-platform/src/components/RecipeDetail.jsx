@@ -1,51 +1,47 @@
-import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import data from "../data.json";
+import { useParams } from "react-router-dom";
+import data from "../data.json"; // Adjust the path if necessary
+import "../styles.css";
 
 const RecipeDetail = () => {
-  const { id } = useParams(); // Get the id from the URL
+  const { id } = useParams(); // Extract the 'id' from the URL
   const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
-    // Find the recipe with the given id
+    // Find the recipe based on the ID from the URL
     const selectedRecipe = data.find((recipe) => recipe.id.toString() === id);
     setRecipe(selectedRecipe);
-  }, [id]);
+  }, [id]); // Re-run when the ID changes
 
-  // If recipe is still loading or not found, display loading or error message
   if (!recipe) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">{recipe.title}</h1>
+    <div className="recipe-detail-container">
+      <h1 className="recipe-title">{recipe.title}</h1>
 
       <div className="flex flex-col md:flex-row gap-8">
-        <img
-          src={recipe.image}
-          alt={recipe.title}
-          className="w-full md:w-1/2 object-cover rounded-lg shadow-lg"
-        />
+        <img src={recipe.image} alt={recipe.title} className="recipe-image" />
 
         <div className="md:w-1/2">
-          <h2 className="text-2xl font-semibold">Ingredients</h2>
-          <ul className="list-disc pl-5 mt-4">
+          <h2 className="recipe-section-heading">Ingredients</h2>
+          <ul className="recipe-list">
             {recipe.ingredients?.map((ingredient, index) => (
-              <li key={index} className="text-gray-700">
-                {ingredient}
-              </li>
+              <li key={index}>{ingredient}</li>
             ))}
           </ul>
 
-          <h2 className="text-2xl font-semibold mt-8">Cooking Instructions</h2>
-          <ol className="list-decimal pl-5 mt-4">
+          <h2 className="recipe-section-heading mt-8">Cooking Instructions</h2>
+          <ol className="recipe-list">
             {recipe.instructions?.map((step, index) => (
-              <li key={index} className="text-gray-700">
-                {step}
-              </li>
+              <li key={index}>{step}</li>
             ))}
           </ol>
+
+          <a href="#" className="view-recipe-button">
+            Back to Recipes
+          </a>
         </div>
       </div>
     </div>
