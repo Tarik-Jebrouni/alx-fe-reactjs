@@ -61,12 +61,14 @@ const AddRecipeForm = () => {
   };
 
   return (
-    <div className="add-recipe-container max-w-lg mx-auto">
-      <h2 className="add-recipe-title">Submit a New Recipe</h2>
+    <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg md:rounded-xl">
+      <h2 className="text-2xl font-semibold text-center mb-6">
+        Submit a New Recipe
+      </h2>
 
       {/* Display errors if there are any */}
       {Object.keys(errors).length > 0 && (
-        <div className="error-container">
+        <div className="text-red-500 mb-4">
           {Object.values(errors).map((error, index) => (
             <div key={index} className="error-message">
               {error}
@@ -86,10 +88,12 @@ const AddRecipeForm = () => {
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="custom-input"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-md"
             placeholder="Enter recipe title"
           />
-          {errors.title && <div className="error-message">{errors.title}</div>}
+          {errors.title && (
+            <div className="text-red-500 text-sm">{errors.title}</div>
+          )}
         </div>
 
         {/* Ingredients */}
@@ -104,11 +108,11 @@ const AddRecipeForm = () => {
             id="ingredients"
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
-            className="custom-textarea"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-md"
             placeholder="Enter ingredients (e.g., flour, sugar, eggs)"
           ></textarea>
           {errors.ingredients && (
-            <div className="error-message">{errors.ingredients}</div>
+            <div className="text-red-500 text-sm">{errors.ingredients}</div>
           )}
         </div>
 
@@ -121,15 +125,20 @@ const AddRecipeForm = () => {
             id="steps"
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
-            className="custom-textarea"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-md"
             placeholder="Enter cooking steps"
           ></textarea>
-          {errors.steps && <div className="error-message">{errors.steps}</div>}
+          {errors.steps && (
+            <div className="text-red-500 text-sm">{errors.steps}</div>
+          )}
         </div>
 
         {/* Submit Button */}
         <div className="text-center">
-          <button type="submit" className="submit-button">
+          <button
+            type="submit"
+            className="submit-button w-full bg-blue-500 text-white py-3 px-8 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-md"
+          >
             Submit Recipe
           </button>
         </div>
