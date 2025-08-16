@@ -114,24 +114,26 @@
 
 /* src/styles.css */
 
-/* Custom container styling for the Add Recipe Form */
+/* src/styles.css */
+
+/* Custom Container Styling */
 .add-recipe-container {
   background-color: #f9fafb; /* Light background for the form */
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Custom styling for the form title */
+/* Form Title */
 .add-recipe-title {
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
   margin-bottom: 1rem;
-  color: #2d3748;
+  color: #2d3748; /* Dark text color */
 }
 
-/* Custom styling for form fields */
+/* Input Fields and Textareas */
 .custom-input,
 .custom-textarea {
   padding: 1rem;
@@ -142,7 +144,7 @@
   font-size: 1rem;
 }
 
-/* Focus styles for input fields */
+/* Focus effect for inputs and textareas */
 .custom-input:focus,
 .custom-textarea:focus {
   border-color: #3182ce;
@@ -150,7 +152,7 @@
   box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.5);
 }
 
-/* Custom button styles */
+/* Submit Button Styling */
 .submit-button {
   background-color: #3182ce;
   color: white;
@@ -166,15 +168,17 @@
   background-color: #2563eb;
 }
 
-/* Custom error message styling */
+/* Error message styling */
 .error-message {
   color: #ef4444;
   font-size: 0.875rem;
   margin-top: 0.25rem;
 }
 
-/* Additional padding and margin for error messages */
+/* Error container for general error message display */
 .error-container {
   margin-top: 1rem;
   text-align: center;
+  font-weight: 600;
+  color: #ef4444;
 }

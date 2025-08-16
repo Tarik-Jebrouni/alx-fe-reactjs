@@ -66,7 +66,7 @@ const AddRecipeForm = () => {
 
       {/* Display errors if there are any */}
       {Object.keys(errors).length > 0 && (
-        <div className="error-container text-red-500">
+        <div className="error-container">
           {Object.values(errors).map((error, index) => (
             <div key={index} className="error-message">
               {error}
