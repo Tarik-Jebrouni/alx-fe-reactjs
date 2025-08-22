@@ -2,29 +2,30 @@ import React, { useState } from "react";
 import "../App.css";
 
 const RegistrationForm = () => {
-  // Initialize the state
+  // Initialize state for the form data
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
 
-  // Handle change in input fields
+  // Handle input field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value }); // Update the state dynamically
   };
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation
+    // Basic validation
     if (!formData.username || !formData.email || !formData.password) {
       alert("All fields are required!");
       return;
     }
 
+    // Simulate API request and show form data in console
     console.log("Form Submitted:", formData);
 
     // Clear form after submission
@@ -43,9 +44,9 @@ const RegistrationForm = () => {
           type="text"
           id="username"
           name="username"
-          value={formData.username}
-          onChange={handleChange}
-          placeholder="Username"
+          value={formData.username} // Linking the input value to state
+          onChange={handleChange} // Handling change event
+          placeholder="Enter your username"
         />
       </div>
 
@@ -55,9 +56,9 @@ const RegistrationForm = () => {
           type="email"
           id="email"
           name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email"
+          value={formData.email} // Linking the input value to state
+          onChange={handleChange} // Handling change event
+          placeholder="Enter your email"
         />
       </div>
 
@@ -67,9 +68,9 @@ const RegistrationForm = () => {
           type="password"
           id="password"
           name="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Password"
+          value={formData.password} // Linking the input value to state
+          onChange={handleChange} // Handling change event
+          placeholder="Enter your password"
         />
       </div>
 
