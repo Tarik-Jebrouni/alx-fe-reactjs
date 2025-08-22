@@ -43,9 +43,9 @@ const RegistrationForm = () => {
         <input
           type="text"
           id="username"
-          name="username"
-          value={formData.username} // Linking the input value to state
-          onChange={handleChange} // Handling change event
+          name="username" // Ensures this input updates formData.username
+          value={formData.username} // Links the input value to formData.username
+          onChange={handleChange} // Handles change and updates the state
           placeholder="Enter your username"
           autoComplete="username" // Added autocomplete attribute
         />
@@ -56,9 +56,9 @@ const RegistrationForm = () => {
         <input
           type="email"
           id="email"
-          name="email"
-          value={formData.email} // Linking the input value to state
-          onChange={handleChange} // Handling change event
+          name="email" // Ensures this input updates formData.email
+          value={formData.email} // Links the input value to formData.email
+          onChange={handleChange} // Handles change and updates the state
           placeholder="Enter your email"
           autoComplete="email" // Added autocomplete attribute
         />
@@ -69,9 +69,9 @@ const RegistrationForm = () => {
         <input
           type="password"
           id="password"
-          name="password"
-          value={formData.password} // Linking the input value to state
-          onChange={handleChange} // Handling change event
+          name="password" // Ensures this input updates formData.password
+          value={formData.password} // Links the input value to formData.password
+          onChange={handleChange} // Handles change and updates the state
           placeholder="Enter your password"
           autoComplete="current-password" // Added autocomplete attribute
         />
