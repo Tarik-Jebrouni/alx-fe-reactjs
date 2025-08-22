@@ -9,31 +9,52 @@ const RegistrationForm = () => {
     password: "",
   });
 
+  // Initialize state for error messages
+  const [errors, setErrors] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
   // Handle input field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value }); // Update the state dynamically
   };
 
+  // Form validation
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.username) {
+      newErrors.username = "Username is required.";
+    }
+    if (!formData.email) {
+      newErrors.email = "Email is required.";
+    }
+    if (!formData.password) {
+      newErrors.password = "Password is required.";
+    }
+    return newErrors;
+  };
+
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Basic validation
-    if (!formData.username || !formData.email || !formData.password) {
-      alert("All fields are required!");
-      return;
+    const formErrors = validateForm();
+    setErrors(formErrors);
+
+    if (Object.keys(formErrors).length === 0) {
+      // Simulate API request and show form data in console
+      console.log("Form Submitted:", formData);
+
+      // Clear form after submission
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+      });
     }
-
-    // Simulate API request and show form data in console
-    console.log("Form Submitted:", formData);
-
-    // Clear form after submission
-    setFormData({
-      username: "",
-      email: "",
-      password: "",
-    });
   };
 
   return (
@@ -43,12 +64,13 @@ const RegistrationForm = () => {
         <input
           type="text"
           id="username"
-          name="username" // Ensures this input updates formData.username
-          value={formData.username} // Links the input value to formData.username
-          onChange={handleChange} // Handles change and updates the state
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
           placeholder="Enter your username"
-          autoComplete="username" // Added autocomplete attribute
+          autoComplete="username"
         />
+        {errors.username && <div className="error">{errors.username}</div>}
       </div>
 
       <div>
@@ -56,12 +78,13 @@ const RegistrationForm = () => {
         <input
           type="email"
           id="email"
-          name="email" // Ensures this input updates formData.email
-          value={formData.email} // Links the input value to formData.email
-          onChange={handleChange} // Handles change and updates the state
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
           placeholder="Enter your email"
-          autoComplete="email" // Added autocomplete attribute
+          autoComplete="email"
         />
+        {errors.email && <div className="error">{errors.email}</div>}
       </div>
 
       <div>
@@ -69,12 +92,13 @@ const RegistrationForm = () => {
         <input
           type="password"
           id="password"
-          name="password" // Ensures this input updates formData.password
-          value={formData.password} // Links the input value to formData.password
-          onChange={handleChange} // Handles change and updates the state
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
           placeholder="Enter your password"
-          autoComplete="current-password" // Added autocomplete attribute
+          autoComplete="current-password"
         />
+        {errors.password && <div className="error">{errors.password}</div>}
       </div>
 
       <button type="submit">Register</button>
