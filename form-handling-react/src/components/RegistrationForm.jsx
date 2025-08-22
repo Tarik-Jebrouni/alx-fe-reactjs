@@ -8,7 +8,9 @@ const RegistrationForm = () => {
     email: "",
     password: "",
   });
-
+  const username = formData.username;
+  const email = formData.email;
+  const password = formData.password;
   // Initialize state for error messages
   const [errors, setErrors] = useState({
     username: "",
@@ -25,13 +27,13 @@ const RegistrationForm = () => {
   // Form validation
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.username) {
+    if (!username) {
       newErrors.username = "Username is required.";
     }
-    if (!formData.email) {
+    if (!email) {
       newErrors.email = "Email is required.";
     }
-    if (!formData.password) {
+    if (!password) {
       newErrors.password = "Password is required.";
     }
     return newErrors;
@@ -56,9 +58,6 @@ const RegistrationForm = () => {
       });
     }
   };
-  const username = formData.username;
-  const email = formData.email;
-  const password = formData.password;
 
   return (
     <form onSubmit={handleSubmit}>
