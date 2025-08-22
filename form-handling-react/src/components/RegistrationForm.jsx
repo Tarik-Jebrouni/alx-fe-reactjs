@@ -56,6 +56,9 @@ const RegistrationForm = () => {
       });
     }
   };
+  const username = formData.username;
+  const email = formData.email;
+  const password = formData.password;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -65,7 +68,7 @@ const RegistrationForm = () => {
           type="text"
           id="username"
           name="username"
-          value={formData.username}
+          value={username}
           onChange={handleChange}
           placeholder="Enter your username"
           autoComplete="username"
@@ -79,7 +82,7 @@ const RegistrationForm = () => {
           type="email"
           id="email"
           name="email"
-          value={formData.email}
+          value={email}
           onChange={handleChange}
           placeholder="Enter your email"
           autoComplete="email"
@@ -93,7 +96,7 @@ const RegistrationForm = () => {
           type="password"
           id="password"
           name="password"
-          value={formData.password}
+          value={password}
           onChange={handleChange}
           placeholder="Enter your password"
           autoComplete="current-password"
