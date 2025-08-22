@@ -47,6 +47,7 @@ const RegistrationForm = () => {
           value={formData.username} // Linking the input value to state
           onChange={handleChange} // Handling change event
           placeholder="Enter your username"
+          autoComplete="username" // Added autocomplete attribute
         />
       </div>
 
@@ -59,6 +60,7 @@ const RegistrationForm = () => {
           value={formData.email} // Linking the input value to state
           onChange={handleChange} // Handling change event
           placeholder="Enter your email"
+          autoComplete="email" // Added autocomplete attribute
         />
       </div>
 
@@ -71,6 +73,7 @@ const RegistrationForm = () => {
           value={formData.password} // Linking the input value to state
           onChange={handleChange} // Handling change event
           placeholder="Enter your password"
+          autoComplete="current-password" // Added autocomplete attribute
         />
       </div>
 
