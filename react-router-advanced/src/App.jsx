@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Profile from "./components/Profile";
 import NotFound from "./components/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
+import BlogPost from "./components/BlogPost";
 import "./App.css"; // Import global CSS file
 
 function App() {
@@ -13,6 +14,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         {/* Protect the Profile route */}
+        <Route path="blog/:id" element={<BlogPost />} />{" "}
+        {/* Dynamic Route for BlogPost */}
         <Route
           path="profile"
           element={
