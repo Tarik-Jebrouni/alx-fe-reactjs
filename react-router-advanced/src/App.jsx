@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         {/* Protect the Profile route */}
-        <Route path="blog/:id" element={<BlogPost />} />{" "}
+        <Route path="/blog/:id" element={<BlogPost />} />{" "}
         {/* Dynamic Route for BlogPost */}
         <Route
           path="profile"
