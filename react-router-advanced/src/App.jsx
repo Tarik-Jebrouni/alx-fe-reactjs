@@ -13,9 +13,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* Protect the Profile route */}
-        <Route path="/blog/:id" element={<BlogPost />} />{" "}
         {/* Dynamic Route for BlogPost */}
+        <Route path="/blog/:id" element={<BlogPost />} />{" "}
+        {/* Protected Route for Profile */}
         <Route
           path="profile"
           element={
@@ -24,6 +24,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        {/* Catch-all route for NotFound */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
