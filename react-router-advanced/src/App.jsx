@@ -17,7 +17,7 @@ function App() {
         <Route path="/blog/:id" element={<BlogPost />} />{" "}
         {/* Protected Route for Profile */}
         <Route
-          path="profile"
+          path="/profile"
           element={
             <ProtectedRoute>
               <Profile />
