@@ -12,7 +12,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="blog/:id" element={<BlogPost />} />{" "}
+        <Route path="/blog/:id" element={<BlogPost />} />{" "}
         {/* Dynamic Route for BlogPost */}
         <Route path="*" element={<NotFound />} />
       </Routes>
