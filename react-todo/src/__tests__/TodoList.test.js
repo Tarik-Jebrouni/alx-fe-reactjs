@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import TodoList from '../component/TodoList'; // Adjust the import path based on your file structure
+import React from 'react'; // Add this line
 
 
 // Test: Render the TodoList component and check initial todos
