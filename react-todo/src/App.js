@@ -9,7 +9,7 @@ function App() {
         <h1>Welcome to the Todo App</h1>
       </header>
       <main>
-        <TodoList />
+        <TodoList />{/* Render the TodoList component */}
       </main>
     </div>
   );
