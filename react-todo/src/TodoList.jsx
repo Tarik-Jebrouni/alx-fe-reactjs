@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
 const TodoList = () => {
+  // Initial state with two demo todos
   const [todos, setTodos] = useState([
     { id: 1, text: "Learn React", completed: false },
     { id: 2, text: "Write tests", completed: false },
   ]);
 
+  // Function to add a new todo
   const addTodo = (text) => {
     setTodos([
       ...todos,
@@ -13,6 +15,7 @@ const TodoList = () => {
     ]);
   };
 
+  // Function to toggle completion of a todo
   const toggleTodo = (id) => {
     setTodos(
       todos.map((todo) =>
@@ -21,6 +24,7 @@ const TodoList = () => {
     );
   };
 
+  // Function to delete a todo
   const deleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
@@ -30,16 +34,16 @@ const TodoList = () => {
       <AddTodoForm addTodo={addTodo} />
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>
+          <li key={todo.id} className="todo-item">
             <span
               onClick={() => toggleTodo(todo.id)}
-              style={{
-                textDecoration: todo.completed ? "line-through" : "none",
-              }}
+              className={`todo-text ${todo.completed ? "completed" : ""}`}
             >
               {todo.text}
             </span>
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            <button onClick={() => deleteTodo(todo.id)} className="delete-btn">
+              Delete
+            </button>
           </li>
         ))}
       </ul>
@@ -47,24 +51,30 @@ const TodoList = () => {
   );
 };
 
+// Add Todo Form component
 const AddTodoForm = ({ addTodo }) => {
   const [input, setInput] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTodo(input);
-    setInput("");
+    if (input.trim()) {
+      addTodo(input);
+      setInput("");
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="add-todo-form">
       <input
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Add a new todo"
+        className="input-field"
       />
-      <button type="submit">Add Todo</button>
+      <button type="submit" className="add-btn">
+        Add Todo
+      </button>
     </form>
   );
 };
