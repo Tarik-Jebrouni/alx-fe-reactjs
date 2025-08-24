@@ -1,22 +1,20 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import TodoList from '../TodoList';  // Import TodoList component
+import TodoList from '../component/TodoList';  // Import TodoList component
 
 // Test: Render the TodoList component and check initial todos
+ 
 test('renders TodoList component with initial todos', () => {
   render(<TodoList />);
-  
-  // Check if the demo todos are rendered
+    // Check if the demo todos are rendered
   expect(screen.getByText('Learn React')).toBeInTheDocument();
   expect(screen.getByText('Write tests')).toBeInTheDocument();
 });
-
 // Test: Adding a new todo
 test('adds a new todo', () => {
   render(<TodoList />);
-  
+
   const input = screen.getByPlaceholderText('Add a new todo');
   const button = screen.getByText('Add Todo');
-  
   // Simulate user typing in the input field
   fireEvent.change(input, { target: { value: 'New Todo' } });
   
