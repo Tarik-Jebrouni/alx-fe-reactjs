@@ -1,9 +1,8 @@
-// src/__tests__/TodoList.test.js
-import { render, fireEvent, screen } from "@testing-library/react";
-import TodoList from "../components/TodoList";
+import React from "react";  // Ensure React is imported
+import { render, screen, fireEvent } from "@testing-library/react";
+import TodoList from "../TodoList";
 
 describe("TodoList Component", () => {
-
   test("should render the TodoList component correctly", () => {
     render(<TodoList />);
     expect(screen.getByText("Todo List")).toBeInTheDocument();
@@ -13,20 +12,16 @@ describe("TodoList Component", () => {
     render(<TodoList />);
     const input = screen.getByPlaceholderText("Add a new todo");
     const button = screen.getByText("Add Todo");
-
     fireEvent.change(input, { target: { value: "Test Todo" } });
     fireEvent.click(button);
-
     expect(screen.getByText("Test Todo")).toBeInTheDocument();
   });
 
   test("should toggle a todo between completed and not completed", () => {
     render(<TodoList />);
     const todoItem = screen.getByText("Learn React");
-
     fireEvent.click(todoItem);
     expect(todoItem).toHaveStyle("text-decoration: line-through");
-
     fireEvent.click(todoItem);
     expect(todoItem).not.toHaveStyle("text-decoration: line-through");
   });
@@ -35,9 +30,7 @@ describe("TodoList Component", () => {
     render(<TodoList />);
     const deleteButton = screen.getAllByText("Delete")[0];
     const todoText = screen.getByText("Learn React");
-
     fireEvent.click(deleteButton);
     expect(todoText).not.toBeInTheDocument();
   });
-
 });
