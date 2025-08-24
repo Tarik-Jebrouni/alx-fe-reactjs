@@ -1,60 +1,63 @@
+// src/__tests__/TodoList.test.js
+import React from 'react'; // Ensure React is imported
 import { render, screen, fireEvent } from '@testing-library/react';
-import TodoList from '../component/TodoList'; // Adjust the import path based on your file structure
-import React from 'react'; // Add this line
+import TodoList from '../component/TodoList'; // Import TodoList component
 
+describe('TodoList Component', () => {
 
-// Test: Render the TodoList component and check initial todos
- 
-test('renders TodoList component with initial todos', () => {
-  render(<TodoList />);
-    // Check if the demo todos are rendered
-  expect(screen.getByText('Learn React')).toBeInTheDocument();
-  expect(screen.getByText('Write tests')).toBeInTheDocument();
-});
-// Test: Adding a new todo
-test('adds a new todo', () => {
-  render(<TodoList />);
+  test('renders TodoList component', () => {
+    render(<TodoList />);
+    const heading = screen.getByText(/Todo List/i);
+    expect(heading).toBeInTheDocument();
+  });
 
-  const input = screen.getByPlaceholderText('Add a new todo');
-  const button = screen.getByText('Add Todo');
-  // Simulate user typing in the input field
-  fireEvent.change(input, { target: { value: 'New Todo' } });
-  
-  // Simulate clicking the add button
-  fireEvent.click(button);
-  
-  // Check if the new todo appears in the list
-  expect(screen.getByText('New Todo')).toBeInTheDocument();
-});
+  test('renders initial todos', () => {
+    render(<TodoList />);
+    const todo1 = screen.getByText(/Learn React/i);
+    const todo2 = screen.getByText(/Write Tests/i);
+    const todo3 = screen.getByText(/Build Todo App/i);
+    expect(todo1).toBeInTheDocument();
+    expect(todo2).toBeInTheDocument();
+    expect(todo3).toBeInTheDocument();
+  });
 
-// Test: Toggling todo completion status
-test('toggles todo completion status', () => {
-  render(<TodoList />);
-  
-  const todoText = screen.getByText('Learn React');
-  
-  // Simulate clicking on the todo to mark it as completed
-  fireEvent.click(todoText);
-  
-  // Check if the todo is crossed out (completed)
-  expect(todoText).toHaveStyle('text-decoration: line-through');
-  
-  // Simulate clicking again to mark it as not completed
-  fireEvent.click(todoText);
-  
-  // Check if the crossing out is removed (not completed)
-  expect(todoText).toHaveStyle('text-decoration: none');
-});
+  test('adds a new todo', () => {
+    render(<TodoList />);
+    const input = screen.getByPlaceholderText('Add a new todo');
+    const button = screen.getByText('Add Todo');
 
-// Test: Deleting a todo
-test('deletes a todo', () => {
-  render(<TodoList />);
-  
-  const deleteButton = screen.getByText('Delete');
-  
-  // Simulate clicking the delete button
-  fireEvent.click(deleteButton);
-  
-  // Check if the todo is removed from the list
-  expect(screen.queryByText('Learn React')).not.toBeInTheDocument();
+    // Simulate user typing and clicking the add button
+    fireEvent.change(input, { target: { value: 'Test adding todo' } });
+    fireEvent.click(button);
+
+    // Check if the new todo is rendered
+    const newTodo = screen.getByText('Test adding todo');
+    expect(newTodo).toBeInTheDocument();
+  });
+
+  test('toggles todo completion', () => {
+    render(<TodoList />);
+    const todoItem = screen.getByText('Learn React');
+    
+    // Click the todo item to toggle completion
+    fireEvent.click(todoItem);
+
+    // Check if the text decoration is applied (line-through)
+    expect(todoItem).toHaveStyle('text-decoration: line-through');
+    
+    // Simulate clicking again to mark it as not completed
+    fireEvent.click(todoItem);
+    expect(todoItem).toHaveStyle('text-decoration: none');
+  });
+
+  test('deletes a todo', () => {
+    render(<TodoList />);
+    const deleteButton = screen.getAllByText('Delete')[0]; // Get the first delete button
+    fireEvent.click(deleteButton);
+
+    // Check if the todo item is removed from the DOM
+    const todoItem = screen.queryByText('Learn React');
+    expect(todoItem).not.toBeInTheDocument();
+  });
+
 });
