@@ -11,18 +11,18 @@ function Profile() {
       <nav>
         <ul>
           <li>
-            <Link to="details">Profile Details</Link>
+            <Link to="/ProfileDetails">Profile Details</Link>
           </li>
           <li>
-            <Link to="settings">Profile Settings</Link>
+            <Link to="/ProfileSettings">Profile Settings</Link>
           </li>
         </ul>
       </nav>
 
       {/* Nested Routes */}
       <Routes>
-        <Route path="details" element={<ProfileDetails />} />
-        <Route path="settings" element={<ProfileSettings />} />
+        <Route path="/details" element={<ProfileDetails />} />
+        <Route path="/settings" element={<ProfileSettings />} />
       </Routes>
     </div>
   );
