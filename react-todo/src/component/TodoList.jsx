@@ -41,7 +41,6 @@ const TodoList = () => {
 
   return (
     <div>
-      <h1>Todo List</h1>
       <form onSubmit={addTodo}>
         <input
           type="text"
